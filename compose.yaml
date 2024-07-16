@@ -20,6 +20,7 @@ services:
     container_name: node-app
     volumes:
       - ./node/app:/usr/src/app
+      - /usr/src/app/node_modules
     entrypoint: wait-for db:3306 -t 40 -- node index.js
     depends_on: 
       - db

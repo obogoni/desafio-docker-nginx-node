@@ -18,20 +18,19 @@ CREATE TABLE IF NOT EXISTS Users (
     PRIMARY KEY (id)
     );`
 
-connection.query(ensureDatabase);
+conn.query(ensureDatabase);
 
-const sql = `INSERT INTO Users(Name) VALUES ('Otavio')`
-
-conn.query(sql)
-
-const getListOfNames = async () => { 
-    const query = `SELECT * FROM people`;
-    const [result] = await connection.execute(query);
-    console.log(result)
-    return result;
-};
+const userNames = ["Alice", "Roberto", "Charles", "Daina", "Eva"];
 
 app.get('/', (req, res) =>{
+
+	const randomIndex = Math.floor(Math.random() * userNames.length);
+
+  	var userName = userNames[randomIndex];
+
+	const sql = `INSERT INTO Users(Name) VALUES (?)`
+
+	conn.query(sql, userName);
 
 	conn.query('SELECT name FROM Users', (err, results) => {
     
